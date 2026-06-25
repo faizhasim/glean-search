@@ -6,7 +6,6 @@ import {
   constants,
   createReadStream,
   createWriteStream,
-  existsSync,
   mkdirSync,
   readFileSync,
   unlinkSync,
@@ -89,10 +88,6 @@ function checkExecutable(p: string): boolean {
   } catch {
     return false;
   }
-}
-
-function previousDownloadFailed(): boolean {
-  return existsSync(downloadErrorPath());
 }
 
 // ── release info from GitHub ──────────────────────────────────────────────

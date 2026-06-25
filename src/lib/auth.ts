@@ -89,10 +89,7 @@ export async function checkGleanAuth(cliPath: string): Promise<AuthInfo> {
  * via Raycast's `open()` API, which is more reliable than the CLI's built-in
  * browser launcher when running in a child process.
  */
-export async function signInToGlean(
-  cliPath: string,
-  email?: string,
-): Promise<{ success: boolean; message: string }> {
+export async function signInToGlean(cliPath: string, email?: string): Promise<{ success: boolean; message: string }> {
   const preferences = getPreferenceValues<Preferences>();
 
   const env: NodeJS.ProcessEnv = {
@@ -136,9 +133,7 @@ export async function signInToGlean(
       // Extract OAuth authorization URL from the CLI's fallback message
       // "If your browser doesn't open, visit:\n  https://..."
       if (!authUrlOpened) {
-        const match = output.match(
-          /https?:\/\/[^\s\n]+(?:oauth\/authorize|authorize\?)[^\s\n]*/
-        );
+        const match = output.match(/https?:\/\/[^\s\n]+(?:oauth\/authorize|authorize\?)[^\s\n]*/);
         if (match) {
           authUrlOpened = true;
           open(match[0]);
@@ -153,9 +148,7 @@ export async function signInToGlean(
       child.kill();
       resolve({
         success: false,
-        message: output
-          ? `Sign in timed out after 60 seconds:\n${output}`
-          : "Sign in timed out. Please try again.",
+        message: output ? `Sign in timed out after 60 seconds:\n${output}` : "Sign in timed out. Please try again.",
       });
     }, 60000);
 

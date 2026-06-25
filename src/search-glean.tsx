@@ -84,15 +84,15 @@ export default function Command() {
           description="Install via Homebrew or download the binary"
           actions={
             <ActionPanel>
-              <Action
-                title="Download CLI Automatically"
-                onAction={() => retryCliDiscovery()}
-              />
+              <Action title="Download Cli Automatically" onAction={() => retryCliDiscovery()} />
               <Action
                 title="Open Download Page"
                 onAction={() => open("https://github.com/gleanwork/glean-cli/releases")}
               />
-              <Action title="Install Via Homebrew" onAction={() => open("https://github.com/gleanwork/glean-cli#installation")} />
+              <Action
+                title="Install Via Homebrew"
+                onAction={() => open("https://github.com/gleanwork/glean-cli#installation")}
+              />
             </ActionPanel>
           }
         />
@@ -107,17 +107,11 @@ export default function Command() {
         <Form
           actions={
             <ActionPanel>
-              <Action.SubmitForm
-                onSubmit={({ email }) => signIn(email as string)}
-              />
+              <Action.SubmitForm onSubmit={({ email }) => signIn(email as string)} />
             </ActionPanel>
           }
         >
-          <Form.TextField
-            id="email"
-            title="Work Email"
-            placeholder="you@company.com"
-          />
+          <Form.TextField id="email" title="Work Email" placeholder="you@company.com" />
         </Form>
       );
     }
