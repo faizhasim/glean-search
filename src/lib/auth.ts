@@ -86,7 +86,6 @@ export async function checkGleanAuth(cliPath: string): Promise<AuthInfo> {
  * browser launcher when running in a child process.
  */
 export async function signInToGlean(cliPath: string, email?: string): Promise<{ success: boolean; message: string }> {
-
   const env: NodeJS.ProcessEnv = {
     ...process.env,
     PATH: ["/usr/local/bin", "/opt/homebrew/bin", process.env.PATH].filter(Boolean).join(":"),

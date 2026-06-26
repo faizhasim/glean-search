@@ -145,7 +145,6 @@ export async function resolveGleanCli(): Promise<string | null> {
     return cached.path;
   }
 
-
   // 2. Cached download binary
   const cachedBin = cachedBinPath();
   if (checkExecutable(cachedBin)) {

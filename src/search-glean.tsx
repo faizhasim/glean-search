@@ -84,7 +84,7 @@ export default function Command() {
           description="Install via Homebrew or download the binary"
           actions={
             <ActionPanel>
-              <Action title="Download CLI Automatically" onAction={() => retryCliDiscovery()} />
+              <Action title="Download Cli Automatically" onAction={() => retryCliDiscovery()} />
               <Action
                 title="Open Download Page"
                 onAction={() => open("https://github.com/gleanwork/glean-cli/releases")}
