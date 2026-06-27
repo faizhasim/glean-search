@@ -1,4 +1,5 @@
 name: Docs
+
 on:
   push:
     branches: [main]
@@ -8,6 +9,9 @@ on:
       - "requirements.txt"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
+
+# GitHub Pages must be enabled in the repo settings (Settings → Pages → Deploy from Actions)
+# for the deploy step to work.
 
 permissions:
   contents: read
@@ -22,16 +26,11 @@ env:
   PYTHON_VERSION: "3.12"
 
 jobs:
-  deploy:
-    name: Build and deploy
+  build:
+    name: Build
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/configure-pages@v5
 
       - name: Set up Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v5
@@ -48,5 +47,15 @@ jobs:
         with:
           path: site
 
+  deploy:
+    name: Deploy
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.repository == 'faizhasim/glean-search'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
       - uses: actions/deploy-pages@v4
         id: deployment
