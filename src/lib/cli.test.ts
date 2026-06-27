@@ -22,9 +22,10 @@ import {
 import { chmod, rename, rm, mkdir } from "fs/promises";
 import { execFile } from "child_process";
 import { environment, showToast } from "@raycast/api";
+import { createHash } from "crypto";
+import https from "https";
 import { describe, it, expect, beforeEach, vi, Mock } from "vitest";
 import { resolveGleanCli, checkExecutable, clearDownloadError } from "./cli";
-
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
