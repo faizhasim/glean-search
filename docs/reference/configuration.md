@@ -2,6 +2,14 @@
 
 ## Raycast preferences
 
+```mermaid
+flowchart LR
+    EV[Environment Variables<br/>GLEAN_SERVER_URL] -->|checked first| RESOLVED[Resolved Configuration]
+    KR[macOS Keyring] -->|checked second| RESOLVED
+    CFG[~/.glean/config.json] -->|checked last| RESOLVED
+```
+
+
 The extension does not require any Raycast preferences. All configuration is handled automatically:
 
 - The Glean CLI binary is auto-downloaded and cached

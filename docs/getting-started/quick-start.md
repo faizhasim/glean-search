@@ -5,6 +5,18 @@
 1. Open Raycast and type **Search Glean**
 2. Press `Enter` to launch the command
 
+
+```mermaid
+flowchart TD
+    A[Launch Search Glean] --> B{Cached server URL?}
+    B -->|Yes| C[Open browser for OAuth]
+    B -->|No| D[Prompt for work email]
+    D --> E[Look up Glean server URL]
+    E --> F[Cache URL in config.json]
+    F --> C
+    C --> G[Complete OAuth in browser]
+    G --> H[Authenticated - ready to search]
+```
 ### Authentication
 
 On first launch, the extension checks whether you are signed in to Glean. There are two paths:

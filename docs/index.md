@@ -4,6 +4,17 @@ Search your company's knowledge base via [Glean](https://glean.com) directly fro
 
 The extension provides a fast, keyboard-driven interface to Glean's enterprise search. Type a query, get results with title, source, and snippet preview, then open in your browser or copy the URL -- all without leaving Raycast.
 
+
+```mermaid
+flowchart LR
+    A[Type query in Raycast] --> B[Extension parses input]
+    B --> C[glean CLI searches API]
+    C --> D[Results with title, source, snippet]
+    D --> E{Action}
+    E -->|Enter| F[Open in browser]
+    E -->|Cmd+C| G[Copy URL to clipboard]
+```
+
 ## Features
 
 - **Quick search** -- start typing and results appear instantly

@@ -10,21 +10,22 @@ copyright: Copyright &copy; 2026 faizhasim
 
 theme:
   name: material
+  custom_dir: docs/overrides
   palette:
-    # Light mode
+    # Light mode — Nord polar day
     - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: indigo
-      accent: indigo
+      scheme: nord
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
 
-    # Dark mode
+    # Dark mode — Nord polar night
     - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: indigo
-      accent: indigo
+      scheme: nord-dark
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
@@ -45,7 +46,11 @@ theme:
 
   icon:
     repo: fontawesome/brands/github
+    logo: material/robot-happy
   favicon: assets/icon.png
+
+extra_css:
+  - stylesheets/nord.css
 
 markdown_extensions:
   # Admonitions / callouts
@@ -102,7 +107,7 @@ extra:
   consent:
     title: Cookie consent
     description: >-
-      This site uses cookies for analytics. Your privacy matters --
+      This site uses cookies for analytics. Your privacy matters —
       you can accept or decline.
 
   version:

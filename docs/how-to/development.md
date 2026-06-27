@@ -2,6 +2,23 @@
 
 ## Project structure
 
+```mermaid
+flowchart LR
+    subgraph src
+        SG[search-glean.tsx] --> GL[lib/glean.ts]
+        GL --> CLI[lib/cli.ts]
+        GL --> AUTH[lib/auth.ts]
+        GL --> TYPES[lib/types.ts]
+    end
+    subgraph External
+        CLI -->|download & verify| GH[GitHub Releases]
+        AUTH -->|glean auth login| GLEAN[Glean CLI]
+        TYPES --> GLEAN
+    end
+    GLEAN -->|search --json| API[Glean API]
+```
+
+
 ```
 glean-search/
   src/

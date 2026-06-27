@@ -10,6 +10,45 @@ decision-makers: faizhasim
 
 The extension needs to authenticate users with their company's Glean instance. Glean uses OAuth for authentication, but the server URL varies per organisation (e.g., `company.glean.com`).
 
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant Ext as Raycast Extension
+    participant CLI as Glean CLI
+    participant Browser
+    participant Glean as Glean Server
+
+    User->>Ext: Launch Search Glean
+    Ext->>CLI: checkGleanAuth()
+    CLI-->>Ext: Not authenticated
+
+    alt Server URL cached
+        Ext->>Browser: Open OAuth URL
+        Browser->>Glean: Authenticate
+        Browser-->>User: Sign-in prompt
+        User->>Browser: Complete sign-in
+        Browser-->>Ext: OAuth callback
+    else First time - no server URL
+        Ext-->>User: Prompt for email
+        User->>Ext: Enter work email
+        Ext->>CLI: glean auth login --email
+        CLI->>Glean: Look up server URL
+        Glean-->>CLI: Server URL
+        CLI-->>Ext: Cache URL in config.json
+        Ext->>Browser: Open OAuth URL
+        Browser->>Glean: Authenticate
+        Browser-->>User: Sign-in prompt
+        User->>Browser: Complete sign-in
+        Browser-->>Ext: OAuth callback
+    end
+
+    Ext->>CLI: glean search --json &lt;query&gt;
+    CLI->>Glean: Search API
+    Glean-->>CLI: JSON results
+    CLI-->>Ext: Parsed results
+    Ext-->>User: Display results
+```
 How should the extension discover the Glean instance and authenticate the user?
 
 ## Decision Drivers
