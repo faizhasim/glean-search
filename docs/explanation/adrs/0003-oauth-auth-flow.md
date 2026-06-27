@@ -43,7 +43,7 @@ sequenceDiagram
         Browser-->>Ext: OAuth callback
     end
 
-    Ext->>CLI: glean search --json &lt;query&gt;
+    Ext->>CLI: glean search --json <query>
     CLI->>Glean: Search API
     Glean-->>CLI: JSON results
     CLI-->>Ext: Parsed results
