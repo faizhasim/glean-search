@@ -33,7 +33,6 @@ export function readGleanConfigServerUrl(): string | null {
   }
 }
 
-
 /**
  * Check whether the glean CLI is authenticated.
  *

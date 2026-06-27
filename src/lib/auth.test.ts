@@ -11,8 +11,6 @@ vi.mock("os", () => ({
 import { readFileSync } from "fs";
 import { execFile, spawn, _emitChildEvent, _resetChildHandlers } from "child_process";
 import { open } from "@raycast/api";
-import { homedir } from "os";
-import { join } from "path";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { readGleanConfigServerUrl, checkGleanAuth, signInToGlean } from "./auth";
 
@@ -25,9 +23,7 @@ beforeEach(() => {
 
 describe("readGleanConfigServerUrl", () => {
   it("returns server_url from valid config", () => {
-    vi.mocked(readFileSync).mockReturnValue(
-      JSON.stringify({ server_url: "https://glean.example.com" }),
-    );
+    vi.mocked(readFileSync).mockReturnValue(JSON.stringify({ server_url: "https://glean.example.com" }));
 
     const result = readGleanConfigServerUrl();
     expect(result).toBe("https://glean.example.com");
@@ -121,9 +117,7 @@ describe("checkGleanAuth", () => {
 
 describe("signInToGlean", () => {
   it("spawns with GLEAN_SERVER_URL when config has server_url", async () => {
-    vi.mocked(readFileSync).mockReturnValue(
-      JSON.stringify({ server_url: "https://glean.example.com" }),
-    );
+    vi.mocked(readFileSync).mockReturnValue(JSON.stringify({ server_url: "https://glean.example.com" }));
 
     const resultPromise = signInToGlean("/path/to/glean");
 
@@ -213,9 +207,7 @@ describe("signInToGlean", () => {
   });
 
   it("extracts OAuth URL from stdout and calls open", async () => {
-    vi.mocked(readFileSync).mockReturnValue(
-      JSON.stringify({ server_url: "https://glean.example.com" }),
-    );
+    vi.mocked(readFileSync).mockReturnValue(JSON.stringify({ server_url: "https://glean.example.com" }));
 
     const resultPromise = signInToGlean("/path/to/glean");
 

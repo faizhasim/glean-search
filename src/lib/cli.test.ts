@@ -10,13 +10,19 @@ vi.mock("crypto", () => ({
   createHash: vi.fn(),
 }));
 
-import { accessSync, readFileSync, writeFileSync, existsSync, unlinkSync, mkdirSync, createReadStream, createWriteStream } from "fs";
+import {
+  accessSync,
+  readFileSync,
+  writeFileSync,
+  unlinkSync,
+  mkdirSync,
+  createReadStream,
+  createWriteStream,
+} from "fs";
 import { chmod, rename, rm, mkdir } from "fs/promises";
 import { execFile } from "child_process";
 import { environment, showToast } from "@raycast/api";
-import https from "https";
-import { createHash } from "crypto";
-import { describe, it, expect, beforeEach, beforeAll, vi, Mock } from "vitest";
+import { describe, it, expect, beforeEach, vi, Mock } from "vitest";
 import { resolveGleanCli, checkExecutable, clearDownloadError } from "./cli";
 
 // ---------------------------------------------------------------------------
@@ -94,7 +100,7 @@ describe("resolveGleanCli", () => {
 
     // Default: execFile rejects (which glean fails)
     (execFile as Mock).mockImplementation((...args: unknown[]) => {
-      const cb = args[args.length - 1] as Function;
+      const cb = args[args.length - 1] as (...args: unknown[]) => void;
       const err = new Error("not found") as Error & { stderr?: string; stdout?: string };
       err.stderr = "";
       err.stdout = "";
@@ -110,16 +116,14 @@ describe("resolveGleanCli", () => {
     // writeFileSync / mkdirSync succeed
     (writeFileSync as Mock).mockReturnValue(undefined);
     (mkdirSync as Mock).mockReturnValue(undefined);
-  })
+  });
 
   // -----------------------------------------------------------------------
   // 2. Cached path found
   // -----------------------------------------------------------------------
   it("returns cached path from cli-info.json when binary is executable", async () => {
     const fakePath = "/tmp/fake-glean-path";
-    (readFileSync as Mock).mockReturnValue(
-      JSON.stringify({ path: fakePath, version: "1.0.0", source: "preference" }),
-    );
+    (readFileSync as Mock).mockReturnValue(JSON.stringify({ path: fakePath, version: "1.0.0", source: "preference" }));
     execPaths.add(fakePath);
 
     const result = await resolveGleanCli();
@@ -163,7 +167,7 @@ describe("resolveGleanCli", () => {
     execPaths.add(whichPath);
 
     (execFile as Mock).mockImplementation((...args: unknown[]) => {
-      const cb = args[args.length - 1] as Function;
+      const cb = args[args.length - 1] as (...args: unknown[]) => void;
       cb(null, whichPath + "\n", "");
     });
 
@@ -202,12 +206,12 @@ describe("resolveGleanCli", () => {
       });
     // createReadStream needs to emit data + end for fileSha256
     const mockReadStream = {
-      on: vi.fn((event: string, handler: Function) => {
+      on: vi.fn((event: string, handler: (...args: unknown[]) => void) => {
         if (event === "data") handler(Buffer.from("mocked archive data"));
         if (event === "end") handler();
         return mockReadStream;
       }),
-      pipe: vi.fn(),
+      pipe: vi.fn().mockReturnThis(),
     };
     (createReadStream as Mock).mockReturnValue(mockReadStream);
 
@@ -217,18 +221,18 @@ describe("resolveGleanCli", () => {
       digest: vi.fn().mockReturnValue("mocked-sha"),
     });
 
-    // Make https.get trigger the download callback properly
-
-    const finishHandlers: Function[] = [];
+    const finishHandlers: Array<(...args: unknown[]) => void> = [];
     const mockWriteStream = {
-      on: vi.fn((event: string, handler: Function) => {
+      on: vi.fn((event: string, handler: (...args: unknown[]) => void) => {
         if (event === "finish") finishHandlers.push(handler);
         return mockWriteStream;
       }),
-      close: vi.fn(),
+      close: vi.fn().mockImplementation(() => {
+        finishHandlers.forEach((fn) => fn());
+      }),
     };
     (createWriteStream as Mock).mockReturnValue(mockWriteStream);
-    (https.get as Mock).mockImplementation((_url: string, cb: Function) => {
+    (https.get as Mock).mockImplementation((_url: string, cb: (...args: unknown[]) => void) => {
       const response = {
         statusCode: 200,
         statusMessage: "OK",
@@ -244,7 +248,7 @@ describe("resolveGleanCli", () => {
     (execFile as Mock)
       // First call (which glean) -> reject
       .mockImplementationOnce((...args: unknown[]) => {
-        const cb = args[args.length - 1] as Function;
+        const cb = args[args.length - 1] as (...args: unknown[]) => void;
         const err = new Error("not found") as Error & { stderr?: string; stdout?: string };
         err.stderr = "";
         err.stdout = "";
@@ -252,7 +256,7 @@ describe("resolveGleanCli", () => {
       })
       // Second call (tar extraction) -> succeed
       .mockImplementationOnce((...args: unknown[]) => {
-        const cb = args[args.length - 1] as Function;
+        const cb = args[args.length - 1] as (...args: unknown[]) => void;
         cb(null, { stdout: "" });
       });
 
