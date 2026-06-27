@@ -21,10 +21,10 @@ Which format and structure should these records follow to be clear, maintainable
 
 ## Considered Options
 
-- **MADR** -- Markdown Architectural Decision Records, an established template with community adoption
-- **Michael Nygard's template** -- The original ADR format from 2011 (Title, Status, Context, Decision, Consequences)
-- **Y-Statements** -- A concise format: "In the context of ... facing ... we decided for ... to achieve ... accepting ..."
-- **Formless** -- No conventions for file format and structure; free-form documentation in any format
+- **MADR** — Markdown Architectural Decision Records, an established template with community adoption
+- **Michael Nygard's template** — The original ADR format from 2011 (Title, Status, Context, Decision, Consequences)
+- **Y-Statements** — A concise format: "In the context of ... facing ... we decided for ... to achieve ... accepting ..."
+- **Formless** — No conventions for file format and structure; free-form documentation in any format
 
 ## Decision Outcome
 
@@ -41,7 +41,7 @@ Chosen option: **MADR**, because:
 - Good, because every significant decision will be documented with clear rationale, making the project more accessible to new contributors and future maintainers
 - Good, because the structured format makes it easy to review, discuss, and supersede decisions over time
 - Bad, because there is an overhead to writing an ADR for every significant decision, which may slow down rapid prototyping if applied too aggressively
-- Bad, because ADRs need to be kept in sync with reality -- a decision that is later reversed should be explicitly superseded
+- Bad, because ADRs need to be kept in sync with reality — a decision that is later reversed should be explicitly superseded
 
 ### Confirmation
 
@@ -51,7 +51,7 @@ Each ADR is reviewed as part of the pull request process. Decisions are revisite
 
 ### MADR
 
-The [Markdown Architectural Decision Records](https://adr.github.io/madr/) template -- structured, Markdown-based, with explicit sections for decision drivers, options, and trade-offs.
+The [Markdown Architectural Decision Records](https://adr.github.io/madr/) template — structured, Markdown-based, with explicit sections for decision drivers, options, and trade-offs.
 
 - Good, because it provides a comprehensive yet lightweight template
 - Good, because it has strong community adoption and an active maintainer
@@ -61,7 +61,7 @@ The [Markdown Architectural Decision Records](https://adr.github.io/madr/) templ
 
 ### Michael Nygard's template
 
-The original ADR format: Title, Status, Context, Decision, Consequences -- described in a 2011 blog post.
+The original ADR format: Title, Status, Context, Decision, Consequences — described in a 2011 blog post.
 
 - Good, because it is the simplest possible ADR format
 - Good, because it is widely recognised and understood
@@ -79,7 +79,7 @@ A single-sentence format: "In the context of ... facing ... we decided for ... t
 
 ### Formless
 
-No conventions at all -- decisions are documented in whatever format seems fit at the time.
+No conventions at all — decisions are documented in whatever format seems fit at the time.
 
 - Good, because there is zero overhead to start documenting
 - Bad, because inconsistency makes it hard to find, compare, and understand past decisions

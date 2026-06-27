@@ -149,3 +149,5 @@ npm run lint
 ## License
 
 [MIT](LICENSE)
+
+<sub>Not affiliated with Glean. Glean is a trademark of Glean Technologies, Inc.</sub>

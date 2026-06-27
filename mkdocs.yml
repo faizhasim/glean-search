@@ -43,11 +43,10 @@ theme:
     - content.tabs.link
     - content.tooltips
     - announce.dismiss
-
   icon:
     repo: fontawesome/brands/github
-    logo: material/robot-happy
-  favicon: assets/icon.png
+  logo: assets/images/icon-logo.png
+  favicon: assets/images/icon-favicon.png
 
 extra_css:
   - stylesheets/nord.css

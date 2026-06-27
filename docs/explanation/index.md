@@ -8,6 +8,6 @@ An Architecture Decision Record (ADR) is a short document that captures a signif
 
 ## ADRs
 
-- [ADR-0001: Use Architectural Decision Records](adrs/0001-use-architectural-decision-records.md) -- the format and process for documenting decisions
-- [ADR-0002: CLI Auto-Download over Bundling](adrs/0002-cli-auto-download.md) -- why the Glean CLI is downloaded at runtime instead of bundled
-- [ADR-0003: OAuth Auth Flow with Email Fallback](adrs/0003-oauth-auth-flow.md) -- how authentication is designed
+- [ADR-0001: Use Architectural Decision Records](adrs/0001-use-architectural-decision-records.md) — the format and process for documenting decisions
+- [ADR-0002: CLI Auto-Download over Bundling](adrs/0002-cli-auto-download.md) — why the Glean CLI is downloaded at runtime instead of bundled
+- [ADR-0003: OAuth Auth Flow with Email Fallback](adrs/0003-oauth-auth-flow.md) — how authentication is designed

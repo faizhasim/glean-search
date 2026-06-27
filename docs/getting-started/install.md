@@ -1,19 +1,20 @@
 # Installation
 
-## Raycast Store (recommended)
+> **Note:** The extension is pending Raycast Store approval. Install from source for now:
 
-The easiest way to install Glean Search is from the [Raycast Store](https://www.raycast.com/faizhasim/glean-search):
+```bash
+git clone https://github.com/faizhasim/glean-search.git
+cd glean-search
+npm install && npm run build
+```
 
-1. Open Raycast
-2. Search for "Store"
-3. Search for "Glean Search"
-4. Press `Enter` to install
+Then open **Search Glean** in Raycast (add via `raycast://extensions/faizhasim/glean-search/search-glean` or use **Import Extension** in Raycast).
 
-After installation, open **Search Glean** to get started.
+Once approved, install from the [Raycast Store](https://www.raycast.com/faizhasim/glean-search).
 
 ## Development install
 
-If you want to modify the extension or contribute, install from source:
+If you want to modify the extension or contribute:
 
 ### Prerequisites
 

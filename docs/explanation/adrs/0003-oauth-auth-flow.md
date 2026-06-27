@@ -61,16 +61,16 @@ How should the extension discover the Glean instance and authenticate the user?
 
 ## Considered Options
 
-- **Email-based instance discovery followed by browser OAuth** -- prompt for email, look up the Glean server URL, then open the browser for OAuth
-- **Manual server URL entry** -- ask the user to enter their company's Glean URL directly
-- **CLI-managed auth only** -- delegate the entire flow to `glean auth login` without any extension-side handling
-- **Embedded OAuth flow** -- implement OAuth PKCE directly in the extension without depending on the CLI
+- **Email-based instance discovery followed by browser OAuth** — prompt for email, look up the Glean server URL, then open the browser for OAuth
+- **Manual server URL entry** — ask the user to enter their company's Glean URL directly
+- **CLI-managed auth only** — delegate the entire flow to `glean auth login` without any extension-side handling
+- **Embedded OAuth flow** — implement OAuth PKCE directly in the extension without depending on the CLI
 
 ## Decision Outcome
 
 Chosen option: **Email-based instance discovery followed by browser OAuth**, because:
 
-- The email lookup is a one-time cost -- the server URL is cached in `~/.glean/config.json`
+- The email lookup is a one-time cost — the server URL is cached in `~/.glean/config.json`
 - Subsequent launches open the browser directly for OAuth, skipping the email prompt
 - The Glean CLI handles the OAuth handshake, so the extension does not implement any OAuth protocol logic
 - The email is used only for the discovery API call (via the CLI) and is not stored by the extension
@@ -86,7 +86,7 @@ Chosen option: **Email-based instance discovery followed by browser OAuth**, bec
 
 ### Confirmation
 
-The auth flow is implemented in `src/lib/auth.ts` and orchestrated by `src/lib/glean.ts`. On mount, `useGlean` calls `checkGleanAuth()` to verify the session. If unauthenticated, it checks for a cached server URL -- if present, it opens the browser for OAuth directly; if absent, it sets `needsEmail = true` to prompt the user.
+The auth flow is implemented in `src/lib/auth.ts` and orchestrated by `src/lib/glean.ts`. On mount, `useGlean` calls `checkGleanAuth()` to verify the session. If unauthenticated, it checks for a cached server URL — if present, it opens the browser for OAuth directly; if absent, it sets `needsEmail = true` to prompt the user.
 
 ## Pros and Cons of the Options
 
@@ -118,7 +118,7 @@ Run `glean auth login` without any extension-side handling, relying on the CLI t
 - Good, because the CLI handles all auth logic and edge cases
 - Bad, because the CLI's interactive prompts do not work well in a non-TTY Raycast child process
 - Bad, because the CLI's email prompt would block indefinitely when stdin is not connected to a terminal
-- Bad, because the extension cannot control the UX -- no loading states, error messages, or sign-in progress
+- Bad, because the extension cannot control the UX — no loading states, error messages, or sign-in progress
 
 ### Embedded OAuth flow
 

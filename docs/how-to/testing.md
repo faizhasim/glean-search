@@ -56,9 +56,9 @@ describe("resolveGleanCli", () => {
 
 The project provides shared mocks in `__mocks__/`:
 
-- `__mocks__/child_process.ts` -- mocks `execFile`, `spawn`, `exec`
-- `__mocks__/fs.ts` -- mocks `existsSync`, `readFileSync`, `writeFileSync`, `mkdirSync`, `chmodSync`, `createWriteStream`
-- `__mocks__/@raycast/api.ts` -- mocks Raycast API (`environment`, `showToast`, `open`, `Toast`)
+- `__mocks__/child_process.ts` — mocks `execFile`, `spawn`, `exec`
+- `__mocks__/fs.ts` — mocks `existsSync`, `readFileSync`, `writeFileSync`, `mkdirSync`, `chmodSync`, `createWriteStream`
+- `__mocks__/@raycast/api.ts` — mocks Raycast API (`environment`, `showToast`, `open`, `Toast`)
 
 Import these in your test to avoid hitting real filesystem or network.
 

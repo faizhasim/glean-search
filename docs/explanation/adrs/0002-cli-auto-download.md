@@ -15,17 +15,17 @@ Options include bundling the binary with the extension, requiring users to insta
 ## Decision Drivers
 
 - The extension should work out of the box without manual setup steps
-- The extension package (`.raycast` archive) should stay small -- the Glean CLI binary is approximately 30 MB
+- The extension package (`.raycast` archive) should stay small — the Glean CLI binary is approximately 30 MB
 - The CLI is updated independently by Glean; users should get updates without needing to reinstall the extension
 - The solution should be reliable across platforms (macOS primary, Linux secondary)
 - The binary must be verified to prevent tampering or corruption
 
 ## Considered Options
 
-- **Auto-download from GitHub Releases** -- download the latest CLI binary on first launch, with SHA-256 verification
-- **Bundle the binary** -- include the CLI binary in the extension package
-- **Manual install only** -- require users to install the CLI via Homebrew or another package manager
-- **System discovery with auto-download fallback** -- check for an existing system install first, then auto-download if not found
+- **Auto-download from GitHub Releases** — download the latest CLI binary on first launch, with SHA-256 verification
+- **Bundle the binary** — include the CLI binary in the extension package
+- **Manual install only** — require users to install the CLI via Homebrew or another package manager
+- **System discovery with auto-download fallback** — check for an existing system install first, then auto-download if not found
 
 ## Decision Outcome
 
@@ -45,7 +45,7 @@ Chosen option: **System discovery with auto-download fallback**, because:
 - Good, because SHA-256 verification protects against corrupted or tampered downloads
 - Bad, because the first launch requires network access and may take a few seconds
 - Bad, because the download logic adds complexity to the codebase (retry, error handling, cache invalidation)
-- Neutral, because users on restricted networks may need to install the CLI manually -- the extension supports this via system discovery
+- Neutral, because users on restricted networks may need to install the CLI manually — the extension supports this via system discovery
 
 ### Confirmation
 

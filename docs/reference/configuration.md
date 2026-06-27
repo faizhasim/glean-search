@@ -5,7 +5,7 @@
 ```mermaid
 flowchart LR
     EV[Environment Variables<br/>GLEAN_SERVER_URL] -->|checked first| RESOLVED[Resolved Configuration]
-    KR[macOS Keyring] -->|checked second| RESOLVED
+    KR[macOS Keychain] -->|checked second| RESOLVED
     CFG[~/.glean/config.json] -->|checked last| RESOLVED
 ```
 
@@ -42,5 +42,5 @@ A metadata file (`cli-info.json`) in the same directory caches the downloaded ve
 
 The extension sets the following environment variables when running Glean CLI commands:
 
-- `GLEAN_SERVER_URL` -- the resolved server URL from `~/.glean/config.json` (if available)
-- `HOME` -- forwarded from the parent process for config file resolution
+- `GLEAN_SERVER_URL` — the resolved server URL from `~/.glean/config.json` (if available)
+- `HOME` — forwarded from the parent process for config file resolution
