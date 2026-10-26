@@ -1,5 +1,5 @@
 [tools]
-python = "3.15.0"
+python = "3.15.2"
 
 [tasks.setup]
 description = "Install project dependencies (Python + zensical)"
